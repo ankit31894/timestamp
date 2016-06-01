@@ -2,7 +2,6 @@
 var express = require("express");
 var http = require("http");
 var moment = require('moment');
-moment().format();
 var app = express();
 
 app.all("*", function(request, response, next) {
