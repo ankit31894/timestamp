@@ -8,12 +8,17 @@ app.all("*", function(request, response, next) {
   response.writeHead(200, { "Content-Type": "text/plain" });
   next();
 });
-app.get("*", function(request, response) {
-    var momen=moment();
-    response.write(request);
-  response.end(JSON.stringify({unix:momen.unix(),natural:momen.format('MMMM Do YYYY')}));
+app.get("/:time", function(request, response) {
+    var momen=moment.unix(request.params.time);
+    if(momen.isValid())
+    response.end(JSON.stringify({unix:momen.utc().unix(),natural:momen.utc().format('MMMM DD YYYY')}));
+    else{ 
+        momen=moment(request.params.time);
+        if(momen.isValid())
+            response.end(JSON.stringify({unix:momen.utc().unix(),natural:momen.utc().format('MMMM DD YYYY')}));
+        response.end(JSON.stringify({unix:null,natural:null}));
+    }
 });
-
 http.createServer(app);
 var port = process.env.PORT || 8080;
 app.listen(port,  function () {
