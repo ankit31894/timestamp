@@ -19,6 +19,9 @@ app.get("/:time", function(request, response) {
         response.end(JSON.stringify({unix:null,natural:null}));
     }
 });
+app.get("*", function(request, response) {
+  response.end("404!");
+});
 http.createServer(app);
 var port = process.env.PORT || 8080;
 app.listen(port,  function () {
