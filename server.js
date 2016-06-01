@@ -11,7 +11,7 @@ app.all("*", function(request, response, next) {
 app.get("*", function(request, response) {
     var momen=moment();
     response.write(request);
-  response.end(JSON.stringify({unix:momen.unix(),natural:momen.format('MMMM Do, YYYY)}));
+  response.end(JSON.stringify({unix:momen.unix(),natural:momen.format('MMMM Do YYYY')}));
 });
 
 http.createServer(app);
