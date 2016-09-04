@@ -8,6 +8,9 @@ app.all("*", function(request, response, next) {
   response.writeHead(200, { "Content-Type": "text/plain" });
   next();
 });
+app.get("/", function(request, response) {
+    response.end("Expected url is https://ankit31894ts.herokuapp.com/string for eg. https://ankit31894ts.herokuapp.com/142314 or https://ankit31894ts.herokuapp.com/Jan%201%2016")
+});
 app.get("/:time", function(request, response) {
     var momen=moment.unix(request.params.time);
     if(momen.isValid())
